@@ -20,5 +20,13 @@ public class Global{
     // number of people
     public static final int NR_PEOPLE = 1;
 
-  
+    public static final int N = 4;
+    public static int DEFAULT_PERIOD = 10; // 10 ms
+    public static Metronome metronome;
+    
+    public static int MIN_RANDOM_PAUSE = 20; // # syncs
+    public static int MAX_RANDOM_PAUSE = 40; // # syncs
+ 
+    public static int MIN_SPEED = 1;
+    public static int MAX_SPEED = 3;
 }

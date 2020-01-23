@@ -12,16 +12,23 @@ public class CityMap{
 
     public static String map_file;
     public static Labyrinth labyrinth = null;
+    protected final FloorPlan floorPlan;
     public static char[] extraSymbols;
     public static char taxi_square;
     public static char pick_up_people_place;
 
+
     public CityMap(String map_file, char[] extraSymbols, Gelem[] gelems){
 
         assert map_file != null;
+        assert Labyrinth.validMapFile(map_file): "ERROR: invalid map file \""+ map_file +"\"";
+
 
         this.map_file = map_file;
         this.extraSymbols = extraSymbols;
+
+
+        floorPlan = new FloorPlan(map_file);
         
         LabyrinthGelem.setShowRoadBoundaries();
 
@@ -30,12 +37,15 @@ public class CityMap{
         taxi_square = extraSymbols[0];
         pick_up_people_place = extraSymbols[1];
 
-        for (int i = 0; i < extraSymbols.length; i++) {
-            labyrinth.attachGelemToRoadSymbol(extraSymbols[i], gelems[i]);
-        }       
+        Labyrinth.setWindowName("Streets");
+        labyrinth = new Labyrinth(floorPlan.exportMap(), floorPlan.roadSymbols(), Global.N, true);
+        labyrinth.attachGelemToRoadSymbol(taxi_square, new ImageGelem("resources/taxi.jpg", labyrinth.board, 90, Global.N, Global.N));
+        labyrinth.attachGelemToRoadSymbol(pick_up_people_place, new ImageGelem("resources/person.png", labyrinth.board, 90, Global.N, Global.N));
+    
+      
 
     }
-
+    
     public static Labyrinth getlabyrinth() {
         assert labyrinth != null;
         
