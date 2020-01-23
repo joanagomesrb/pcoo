@@ -1,0 +1,5 @@
+
+#!/bin/bash
+
+find . -name \*.class -printf "removing %p\n" -exec rm -f {} \;
+
