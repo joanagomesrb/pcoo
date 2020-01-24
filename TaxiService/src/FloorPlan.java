@@ -19,7 +19,7 @@ public class FloorPlan
    {
       assert Labyrinth.validMapFile(pathToMap): "ERROR: invalid map file \""+pathToMap+"\"";
 
-      roadSymbols = new char[] {taxi_square, pick_up_people_place};
+      roadSymbols = new char[] {taxi_square, pick_up_people_place, coffee, library};
       System.out.println("Hello world 3");
       readFile(pathToMap);
    }
@@ -35,7 +35,7 @@ public class FloorPlan
 
    public boolean isReservedSymbol(char symbol)
    {
-      return symbol == taxi_square || symbol == pick_up_people_place;
+      return symbol == taxi_square || symbol == pick_up_people_place || symbol == coffee || symbol == library;
    }
 
    public boolean validRoomIDSymbol(char symbol)
@@ -80,6 +80,8 @@ public class FloorPlan
          }
          fillPosition(room, ps[i].line()+1, ps[i].column(), taxi_square, reg);
          fillPosition(room, ps[i].line()-1, ps[i].column(), pick_up_people_place, reg);
+         fillPosition(room, ps[i].line()-1, ps[i].column(), coffee, reg);
+         fillPosition(room, ps[i].line()-1, ps[i].column(), library, reg);
       }
 
       out.print(room.description()+" bounding box: ("+reg.minLin+","+reg.minCol+") to ("+reg.maxLin+","+reg.maxCol+")");
@@ -416,6 +418,8 @@ public class FloorPlan
             {
                case taxi_square: map[line][column] = pick_up_people_place; break;
                case pick_up_people_place: map[line][column] = taxi_square; break;
+               case coffee: map[line][column] = library; break;
+               case library: map[line][column] = coffee; break;
             }
          }
          else if (room.isRoad(map[line][column]) && (map[line][column] != room.IDSymbol()))
@@ -426,8 +430,8 @@ public class FloorPlan
                room.registerResourcePosition(map[line][column], line, column);
             fillPosition(room, line+1, column, taxi_square, reg);
             fillPosition(room, line-1, column, pick_up_people_place, reg);
-           // fillPosition(room, line, column+1,  westChar, reg);
-           // fillPosition(room, line, column-1,  eastChar, reg);
+            fillPosition(room, line, column+1,  coffee, reg);
+            fillPosition(room, line, column-1,  library, reg);
          }
          else
             checkBoundaries = false;
@@ -451,10 +455,10 @@ public class FloorPlan
    protected int numColumns = 0;
    protected char[] roadSymbols;
 
+   public final static char taxi_square = 'S';
    public final static char pick_up_people_place = 'P';
-   public final static char  taxi_square = 'S';
-   //public final static char  westChar = 'w';
-  // public final static char southChar = 's';
+   public final static char coffee = 'C';
+   public final static char library = 'L';
 
    protected class TemporaryPositionsRegister
    {

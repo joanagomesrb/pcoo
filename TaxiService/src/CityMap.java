@@ -16,7 +16,8 @@ public class CityMap{
     public static char[] extraSymbols;
     public static char taxi_square;
     public static char pick_up_people_place;
-
+    public static char coffee;
+    public static char library;
 
     public CityMap(String map_file, char[] extraSymbols, Gelem[] gelems){
 
@@ -36,11 +37,15 @@ public class CityMap{
 
         taxi_square = extraSymbols[0];
         pick_up_people_place = extraSymbols[1];
+        coffee = extraSymbols[2];
+        library = extraSymbols[3];
 
         Labyrinth.setWindowName("Streets");
         labyrinth = new Labyrinth(floorPlan.exportMap(), floorPlan.roadSymbols(), Global.N, true);
         labyrinth.attachGelemToRoadSymbol(taxi_square, new ImageGelem("resources/taxi.jpg", labyrinth.board, 90, Global.N, Global.N));
         labyrinth.attachGelemToRoadSymbol(pick_up_people_place, new ImageGelem("resources/person.png", labyrinth.board, 90, Global.N, Global.N));
+        labyrinth.attachGelemToRoadSymbol(coffee, new ImageGelem("resources/coffee.jpg", labyrinth.board, 90, Global.N, Global.N));
+        labyrinth.attachGelemToRoadSymbol(library, new ImageGelem("resources/library.png", labyrinth.board, 90, Global.N, Global.N));
     
       
 

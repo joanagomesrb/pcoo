@@ -16,6 +16,8 @@ public class Main{
         String map = Global.MAP;
         char taxi_square = 'S';
         char pick_up_people_place = 'P';
+        char coffee = 'C';
+        char library = 'L';
 
         int period = Global.DEFAULT_PERIOD;
         Global.metronome = new Metronome(period);
@@ -23,12 +25,16 @@ public class Main{
 
         char[] extraSymbols= {
             taxi_square,
-            pick_up_people_place
+            pick_up_people_place,
+            coffee,
+            library
         };
 
         Gelem[] gelems = {
             new StringGelem("" + taxi_square, Color.yellow),
-            new StringGelem("" + pick_up_people_place, Color.black)        
+            new StringGelem("" + pick_up_people_place, Color.black),
+            new StringGelem("" + coffee, Color.black),
+            new StringGelem("" + library, Color.black)        
         };
     
 
