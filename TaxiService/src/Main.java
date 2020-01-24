@@ -46,12 +46,17 @@ public class Main{
         Controller controller = new Controller();
         
         int i = Global.NR_TAXI;
-        //Taxi taxi = new Taxi(i, extraSymbols);
+        int j = Global.NR_PEOPLE;
 
-        Map positions = new TreeMap<>();
+        Map positionsTaxi = new TreeMap<>();
         Position[] taxi_square_point = cityMap.getlabyrinth().roadSymbolPositions(taxi_square);
-        Taxi taxi = new Taxi(i, controller, taxi_square_point, positions, extraSymbols);
+        Taxi taxi = new Taxi(i, controller, taxi_square_point, positionsTaxi, extraSymbols);
         taxi.start();
+
+        Map positionsPeople = new TreeMap<>();
+        Position[] pick_up_people_place_point = cityMap.getlabyrinth().roadSymbolPositions(pick_up_people_place);
+        People people = new People(j, controller, pick_up_people_place_point, positionsPeople, extraSymbols);
+        people.start();
         
 
 

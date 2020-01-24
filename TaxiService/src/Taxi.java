@@ -41,7 +41,6 @@ public class Taxi extends Thread {
         this.taxi_g = new ImageGelem("resources/taxi.jpg", this.labyrinth.board, 80, Global.N, Global.N);
 
         // go pick up a person
-        out.println("Taxi #" + id + " started its day work!");
  
         // taxi day's work beginning:
         //pos = CityMap.taxi_square().randomEntryPosition();
@@ -59,14 +58,17 @@ public class Taxi extends Thread {
         //Position[] path;
         //path = this.labyrinth.floorPlan.randomShortestPath(pos, dest);
         //this.labyrinth.board.move(this.taxi, Global.N*pos.line()+i*l, Global.N*pos.column()+i*c, 2, Global.N*pos.line()+(i+1)*l, Global.N*pos.column()+(i+1)*c, 2);
-        out.println("Hello Taxi1!");
+        out.println("Taxi #" + id + " started its day work!");
+        Position currentPos = (this.labyrinth.symbolPositions(this.taxi))[0];
+        draw(currentPos);
+
+        // go pick up a person
+        //Postion pick_up_people_place_point = new Position();
         // get current position of symbol
         //out.println((this.labyrinth.symbolPositions(this.taxi))[0]);
-        Position currentPos = (this.labyrinth.symbolPositions(this.taxi))[0];
-        out.println(currentPos);
-        Position nextPos = new Position(3,1);
+        //Position nextPos = new Position(3,1);
         //out.println(gelemLayer(this.taxi_g, currentPos.line(), currentPos.column()));
-        go(currentPos, nextPos);
+        //go(currentPos, nextPos);
     }
 
     public void go(Position now, Position then){

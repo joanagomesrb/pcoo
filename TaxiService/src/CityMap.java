@@ -44,7 +44,7 @@ public class CityMap{
         labyrinth.setNumberOfLayers(2);
         labyrinth = new Labyrinth(floorPlan.exportMap(), floorPlan.roadSymbols(), Global.N, true);
         //labyrinth.attachGelemToRoadSymbol(taxi_square, new ImageGelem("resources/taxi.jpg", labyrinth.board, 90, Global.N, Global.N));
-        labyrinth.attachGelemToRoadSymbol(pick_up_people_place, new ImageGelem("resources/person.png", labyrinth.board, 90, Global.N, Global.N));
+        //labyrinth.attachGelemToRoadSymbol(pick_up_people_place, new ImageGelem("resources/person.png", labyrinth.board, 90, Global.N, Global.N));
         labyrinth.attachGelemToRoadSymbol(coffee, new ImageGelem("resources/coffee.jpg", labyrinth.board, 90, Global.N, Global.N));
         labyrinth.attachGelemToRoadSymbol(library, new ImageGelem("resources/library.png", labyrinth.board, 90, Global.N, Global.N));
     

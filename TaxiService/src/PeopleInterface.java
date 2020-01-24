@@ -9,8 +9,8 @@ import pt.ua.gboard.games.*;
 import pt.ua.concurrent.*;
 
 
-public class IPeopleInterface{
+public interface PeopleInterface{
 
-    public int getID(){}
-    public Position[] pick_up_people_place_point(){}
+    public int getID();
+    public Position[] pick_up_people_place_point();
 }
