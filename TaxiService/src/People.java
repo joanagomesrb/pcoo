@@ -9,7 +9,7 @@ import pt.ua.gboard.games.*;
 import pt.ua.concurrent.*;
 
 
-public class People extends Thread{
+public class People extends Thread implements IPeopleInterface{
 
     private int id;
     private Position[] pick_up_people_place_point;
@@ -31,10 +31,16 @@ public class People extends Thread{
         this.library = extraSymbols[3];
         this.labyrinth = CityMap.getlabyrinth();
 
-        
-
         //this.labyrinth.board.draw(new ImageGelem("resources/person.png", labyrinth.board, 100), lin, col, 1);
 
+    }
+
+    public int getID(){
+        return this.id;
+    }
+
+    public Position[] pick_up_people_place_point(){
+        return this.pick_up_people_place_point;
     }
 
 }

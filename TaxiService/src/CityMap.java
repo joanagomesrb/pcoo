@@ -33,23 +33,29 @@ public class CityMap{
         
         LabyrinthGelem.setShowRoadBoundaries();
 
-        labyrinth = new Labyrinth(map_file, extraSymbols);
+        //labyrinth = new Labyrinth(map_file, extraSymbols);
 
         taxi_square = extraSymbols[0];
         pick_up_people_place = extraSymbols[1];
         coffee = extraSymbols[2];
         library = extraSymbols[3];
 
-        Labyrinth.setWindowName("Streets");
+        Labyrinth.setWindowName("City");
+        labyrinth.setNumberOfLayers(2);
         labyrinth = new Labyrinth(floorPlan.exportMap(), floorPlan.roadSymbols(), Global.N, true);
-        labyrinth.attachGelemToRoadSymbol(taxi_square, new ImageGelem("resources/taxi.jpg", labyrinth.board, 90, Global.N, Global.N));
+        //labyrinth.attachGelemToRoadSymbol(taxi_square, new ImageGelem("resources/taxi.jpg", labyrinth.board, 90, Global.N, Global.N));
         labyrinth.attachGelemToRoadSymbol(pick_up_people_place, new ImageGelem("resources/person.png", labyrinth.board, 90, Global.N, Global.N));
         labyrinth.attachGelemToRoadSymbol(coffee, new ImageGelem("resources/coffee.jpg", labyrinth.board, 90, Global.N, Global.N));
         labyrinth.attachGelemToRoadSymbol(library, new ImageGelem("resources/library.png", labyrinth.board, 90, Global.N, Global.N));
     
+       
+       
+
       
 
     }
+
+
     
     public static Labyrinth getlabyrinth() {
         assert labyrinth != null;

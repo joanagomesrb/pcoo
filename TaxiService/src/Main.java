@@ -3,6 +3,9 @@ package src;
 import static java.lang.System.*;
 import java.awt.Color;
 import java.awt.Point;
+import java.util.Map;
+import java.util.TreeMap;
+
 import pt.ua.gboard.*;
 import pt.ua.gboard.basic.*;
 import pt.ua.gboard.games.*;
@@ -40,7 +43,18 @@ public class Main{
 
 
         CityMap cityMap = new CityMap(map, extraSymbols, gelems);
+        Controller controller = new Controller();
         
+        int i = Global.NR_TAXI;
+        //Taxi taxi = new Taxi(i, extraSymbols);
+
+        Map positions = new TreeMap<>();
+        Position[] taxi_square_point = cityMap.getlabyrinth().roadSymbolPositions(taxi_square);
+        Taxi taxi = new Taxi(i, controller, taxi_square_point, positions, extraSymbols);
+        taxi.start();
+        
+
+
        /* Position[] taxi_quare_point = CityMap.getlabyrinth().roadSymbolPositions(taxi_square);
         Position[] pick_up_people_place_point = cityMap.getlabyrinth().roadSymbolPositions(pick_up_people_place);
         
