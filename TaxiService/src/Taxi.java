@@ -18,7 +18,7 @@ public class Taxi extends Thread {
     private Position[] pick_up_people_place_point;
     private static char taxi;
     private static Gelem taxi_g;
-    private static char pick_up_people_place;
+    private static char person;
     private static char coffee;
     private static char library;
     private static Labyrinth labyrinth;
@@ -33,7 +33,7 @@ public class Taxi extends Thread {
         this.id = id;
         this.taxi_square_point = taxi_square;
         this.taxi = extraSymbols[0];
-        this.pick_up_people_place = extraSymbols[1];
+        this.person = extraSymbols[1];
         this.coffee = extraSymbols[2];
         this.library = extraSymbols[3];
         this.labyrinth = CityMap.getlabyrinth();
@@ -63,6 +63,8 @@ public class Taxi extends Thread {
         draw(currentPos);
 
         // go pick up a person
+        goPickUp(currentPos);
+        
         //Postion pick_up_people_place_point = new Position();
         // get current position of symbol
         //out.println((this.labyrinth.symbolPositions(this.taxi))[0]);
@@ -71,12 +73,21 @@ public class Taxi extends Thread {
         //go(currentPos, nextPos);
     }
 
+    public void goPickUp(Position now){
+        assert now != null;
+
+        Position personPos = (this.labyrinth.symbolPositions(this.person))[0];
+        go(now, personPos);
+    }
+
     public void go(Position now, Position then){
         assert now != null;
         assert then != null;
 
         if ((this.labyrinth.isRoad(then.line(), then.column())) && this.labyrinth.validPosition(then.line(), then.column())){
-            draw(then);
+            searchPath(now, then);
+            
+            //draw(then);
             out.println("Moving!");
 
         }
@@ -86,11 +97,82 @@ public class Taxi extends Thread {
         //draw(thise);
     }
 
-    public void searchPath(int distance, int lin, int col, Map markedPositions) {
-        if(this.labyrinth.validPosition(lin, col)){
-            out.println("Hello Taxi2");
-        }
+    
+    public void searchPath(Position now, Position then){
+        assert now != null;
+        assert then != null;
+        
+        int xN = now.line();
+        int yN = now.column();
+        int xT = then.line();
+        int yT = then.column();
 
+        out.println("now " + now);
+        out.println("then " + then);
+        /*out.println("yN " + yN);
+        out.println("yT " + yT);*/
+        
+        boolean arrived = false;
+        Position move = now;
+        //Position newnow;
+
+        int i = 0;
+        while(!arrived && !move.isEqual(then)){
+            if (xN == xT){
+                if (yN == yT){
+                    arrived = true;
+                }else if (yN < yT){
+                    erase(now);
+                    move = goRight(now);
+                    draw(move);
+                    now = move;
+                }else if (yN > yT){
+                    erase(now);
+                    move = goLeft(now);
+                    draw(now);
+                    now = move;
+                }
+            }else if (xN < xT){
+                erase(now);
+                move = goDown(now);
+                draw(now);
+                now = move;
+            }else if (xN > xT){
+                erase(now);
+                move = goUp(now);
+                draw(now);
+                now = move;
+            }
+        }
+    }
+
+    private Position goRight(Position now){
+
+        int yN = now.column();
+        Position move = new Position(now.line(), yN+1);
+
+        return move;
+    }
+    private Position goLeft(Position now){
+
+        int yN = now.column();
+        Position move = new Position(now.line(), yN-1);
+
+        return move;
+    }
+    private Position goDown(Position now){
+        
+        int xN = now.line();
+        Position move = new Position(xN-1, now.column());
+
+        return move;
+    }
+    private Position goUp(Position now){
+         
+        int xN = now.line();
+        Position move = new Position(xN+1, now.column());
+
+        return move;
     }
 
     private void erase(Position pos){

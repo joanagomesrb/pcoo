@@ -22,6 +22,7 @@ public class People extends Thread implements PeopleInterface{
     private static char library;
     private static Labyrinth labyrinth;
     private Gelem person_g;
+    public  Position currentPosition;
 
     People(int id, Controller controller, Position[] pick_up_people_place_point, Map positions, char[] extraSymbols){
         assert id > 0;
@@ -36,6 +37,11 @@ public class People extends Thread implements PeopleInterface{
         this.labyrinth = CityMap.getlabyrinth();
         this.person_g = new ImageGelem("resources/person.png", this.labyrinth.board, 80, Global.N, Global.N);
 
+
+        //this.currentPosition = startPosition;
+        
+
+
         //this.labyrinth.board.draw(new ImageGelem("resources/person.png", labyrinth.board, 100), lin, col, 1);
 
     }
@@ -43,8 +49,10 @@ public class People extends Thread implements PeopleInterface{
     @Override
     public void run() {
         out.println("Person #" + id + " started its day!");
-        Position currentPos = (this.labyrinth.symbolPositions(this.person))[0];
-        draw(currentPos);
+        //Position currentPos = (this.labyrinth.symbolPositions(this.person))[0];
+        Position tmp = (this.labyrinth.symbolPositions(this.person))[0];
+        this.currentPosition = tmp;
+        draw(this.currentPosition);
 
     }
 
@@ -61,5 +69,4 @@ public class People extends Thread implements PeopleInterface{
     public Position[] pick_up_people_place_point(){
         return this.pick_up_people_place_point;
     }
-
 }

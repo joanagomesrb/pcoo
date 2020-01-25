@@ -13,7 +13,7 @@ import pt.ua.concurrent.*;
 
 public class Main{
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws InterruptedException{
 
         // variables
         String map = Global.MAP;
@@ -55,9 +55,11 @@ public class Main{
 
         Map positionsPeople = new TreeMap<>();
         Position[] pick_up_people_place_point = cityMap.getlabyrinth().roadSymbolPositions(pick_up_people_place);
+        
         People people = new People(j, controller, pick_up_people_place_point, positionsPeople, extraSymbols);
         people.start();
         
+        taxi.join();
 
 
        /* Position[] taxi_quare_point = CityMap.getlabyrinth().roadSymbolPositions(taxi_square);
